@@ -5,4 +5,4 @@ SATNOGS_API_URL: "https://network.satnogs.org/api/"
 SATNOGS_STATION_LAT: "0"
 SATNOGS_STATION_LON: "0"
 SATNOGS_STATION_ELEV: "0"
-satnogs_install_source: "no"
+satnogs_install_source: False
