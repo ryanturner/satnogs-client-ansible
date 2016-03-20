@@ -1,5 +1,5 @@
 sudo apt-get update
-sudo apt-get install python-pip git -y
+sudo apt-get install python-pip git python-dev -y
 sudo pip install ansible markupsafe
 cd $(mktemp -d)
 git clone https://github.com/ryanturner/satnogs-client-ansible.git
