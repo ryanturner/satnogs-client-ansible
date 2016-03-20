@@ -79,7 +79,7 @@
     - setup-satnogs-client
   notify:
     - Restart satnogs
-  when: !(satnogs_install_source | default('no') | bool)
+  when: not satnogs_install_source | default('no') | bool
 
 - name: Fetch SatNOGS client source
   git: repo=https://github.com/satnogs/satnogs-client.git dest=/root/satnogs-client
