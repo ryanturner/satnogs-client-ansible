@@ -13,6 +13,8 @@ echo -n "SatNOGS Station Elevation (m, integer): "
 read SATNOGS_STATION_ELEV
 echo -n "Additional Ansible flags (Optional): "
 read ADDITIONAL_ANSIBLE_FLAGS
+echo -n "Additional Ansible hostvars (Optional): "
+read ADDITIONAL_ANSIBLE_HOSTVARS
 sudo apt-get update
 sudo apt-get install python-pip git python-dev -y
 sudo pip install ansible markupsafe
@@ -22,7 +24,7 @@ cd satnogs-client-ansible
 git checkout dev
 cd ..
 echo "[satnogs]
-localhost SATNOGS_API_URL=$SATNOGS_API_URL SATNOGS_API_TOKEN=$SATNOGS_API_TOKEN SATNOGS_STATION_ID=$SATNOGS_STATION_ID SATNOGS_STATION_LAT=$SATNOGS_STATION_LAT SATNOGS_STATION_LON=$SATNOGS_STATION_LON SATNOGS_STATION_ELEV=$SATNOGS_STATION_ELEV
+localhost SATNOGS_API_URL=$SATNOGS_API_URL SATNOGS_API_TOKEN=$SATNOGS_API_TOKEN SATNOGS_STATION_ID=$SATNOGS_STATION_ID SATNOGS_STATION_LAT=$SATNOGS_STATION_LAT SATNOGS_STATION_LON=$SATNOGS_STATION_LON SATNOGS_STATION_ELEV=$SATNOGS_STATION_ELEV $ADDITIONAL_ANSIBLE_HOSTVARS
 " > hosts
 echo "- hosts: satnogs
   serial: 1

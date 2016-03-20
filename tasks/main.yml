@@ -88,7 +88,7 @@
   when: satnogs_install_source|bool
 
 - name: Build satnogs client source
-  shell: "python setup.py {{ item }}"
+  shell: "python setup.py {{ item }}" chdir=/root/satnogs-client
   with_items:
     - build
     - install
