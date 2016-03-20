@@ -1,12 +1,4 @@
-sudo apt-get update
-sudo apt-get install python-pip git python-dev -y
-sudo pip install ansible markupsafe
-cd $(mktemp -d)
-git clone https://github.com/ryanturner/satnogs-client-ansible.git
-cd satnogs-client-ansible
-git checkout dev
-cd ..
-echo "Now, let's find out more about this station..."
+echo "Let's find out more about this station..."
 echo -n "SatNOGS API URL: "
 read SATNOGS_API_URL
 echo -n "SatNOGS API Token: "
@@ -21,6 +13,14 @@ echo -n "SatNOGS Station Elevation (m, integer): "
 read SATNOGS_STATION_ELEV
 echo -n "Additional Ansible flags (Optional): "
 read ADDITIONAL_ANSIBLE_FLAGS
+sudo apt-get update
+sudo apt-get install python-pip git python-dev -y
+sudo pip install ansible markupsafe
+cd $(mktemp -d)
+git clone https://github.com/ryanturner/satnogs-client-ansible.git
+cd satnogs-client-ansible
+git checkout dev
+cd ..
 echo "[satnogs]
 localhost SATNOGS_API_URL=$SATNOGS_API_URL SATNOGS_API_TOKEN=$SATNOGS_API_TOKEN SATNOGS_STATION_ID=$SATNOGS_STATION_ID SATNOGS_STATION_LAT=$SATNOGS_STATION_LAT SATNOGS_STATION_LON=$SATNOGS_STATION_LON SATNOGS_STATION_ELEV=$SATNOGS_STATION_ELEV
 " > hosts
