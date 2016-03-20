@@ -76,14 +76,28 @@
 - name: Install satnogs-client
   pip: name=satnogsclient
   tags:
-    - setup-satnogs
+    - setup-satnogs-client
   notify:
     - Restart satnogs
+  when: satnogs_install_source | default('no') | bool is false
+
+- name: Fetch SatNOGS client source
+  git: repo=https://github.com/satnogs/satnogs-client.git dest=/root/satnogs-client
+  tags:
+    - setup-satnogs-client
+  when: satnogs_install_source | default('no') | bool is true
+
+- name: Build satnogs client source
+  shell: "python setup.py {{ item }}"
+  with_items:
+    - build
+    - install
+  when: satnogs_install_source | default('no') | bool is true
 
 - name: Setup supervisor for rotctld process
   template: src="supervisor-rotctld.conf.j2" dest="/etc/supervisor/conf.d/rotctld.conf"
   tags:
-    - setup-satnogs
+    - setup-satnogs-client
   notify:
     - Restart rotctld
 
@@ -92,6 +106,6 @@
 - name: Setup supervisor for satnogs-poller process
   template: src="supervisor-satnogs-poller.conf.j2" dest="/etc/supervisor/conf.d/satnogs.conf"
   tags:
-    - setup-satnogs
+    - setup-satnogs-client
   notify:
     - Restart satnogs
